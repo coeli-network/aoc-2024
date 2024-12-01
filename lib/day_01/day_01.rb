@@ -16,22 +16,29 @@ module AdventOfCode2024
         list_two = list_two.sort
         [list_one, list_two]
       end
+
+      def part_one
+        list_one, list_two = @input
+        sum = 0
+        list_one.each_with_index do |val, idx|
+          sum += (val - list_two[idx]).abs
+        end
+
+        sum
+      end
     end
 
     def self.solve(input_file_path=File.join(__dir__, 'day_01.input'))
       input_string = File.read(input_file_path)
-      list_one, list_two = Puzzle.parse_input(input_string)
-      sum = 0
-      list_one.each_with_index do |val, idx|
-        sum += (val - list_two[idx]).abs
-      end
-      sum
+      parsed_input = Puzzle.parse_input(input_string)
+      puzzle = Puzzle.new(parsed_input)
+      
+      puts "Day01.1 Solution: #{puzzle.part_one}"
+      # puts "Day01.2 Solution: #{puzzle.part_two}"
     end
   end
 end
 
 if __FILE__ == $PROGRAM_NAME
-  solution = AdventOfCode2024::Day01.solve
-  puts solution
-  solution
+  AdventOfCode2024::Day01.solve
 end
