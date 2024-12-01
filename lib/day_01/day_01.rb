@@ -26,6 +26,18 @@ module AdventOfCode2024
 
         sum
       end
+
+      def part_two
+        similarity_score = 0
+        list_one, list_two = @input
+        one_tally, two_tally = list_one.tally, list_two.tally
+        one_tally.each do |k, v|
+          occurrences_in_two = two_tally[k] || 0
+          similarity_score += k * v * occurrences_in_two 
+        end
+
+        similarity_score
+      end
     end
 
     def self.solve(input_file_path=File.join(__dir__, 'day_01.input'))
@@ -34,7 +46,7 @@ module AdventOfCode2024
       puzzle = Puzzle.new(parsed_input)
       
       puts "Day01.1 Solution: #{puzzle.part_one}"
-      # puts "Day01.2 Solution: #{puzzle.part_two}"
+      puts "Day01.2 Solution: #{puzzle.part_two}"
     end
   end
 end
