@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require_relative '../lib/advent_of_code_2024'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: solve [options]"
+
+  opts.on("-dDAY", "--day=DAY", String, "Specify which day's puzzle to solve") do |day|
+    options[:day] = day
+  end
+end.parse!
+
+if options[:day]
+  AdventOfCode2024.run_day(options[:day])
+else
+  # Find all days and run them
+  days = Dir.glob(File.join(__dir__, '..', 'lib', 'day_*')).sort.map do |dir|
+    File.basename(dir).sub('day_', '').to_i
+  end
+
+  days.each do |day_number|
+    begin
+      AdventOfCode2024.run_day(day_number.to_s.rjust(2, '0'))
+    rescue => e
+      puts "Error solving Day #{day_number}: #{e.message}"
+    end
+  end
+end

@@ -40,7 +40,7 @@ module AdventOfCode2024
       end
     end
 
-    def self.solve(input_file_path=File.join(__dir__, 'day_01.input'))
+    def self.solve(input_file_path = File.join(__dir__, 'input.txt'))
       input_string = File.read(input_file_path)
       parsed_input = Puzzle.parse_input(input_string)
       puzzle = Puzzle.new(parsed_input)
